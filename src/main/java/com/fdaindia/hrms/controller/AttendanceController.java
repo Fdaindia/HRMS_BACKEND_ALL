@@ -24,7 +24,7 @@ public class AttendanceController {
 	private EmployeeService employeeService;
 	//This is main branch 
 	@CrossOrigin()
-	@PostMapping("/punch")
+	@PostMapping("/punch-in")
 	public ResponseEntity<?> punchIn(@RequestBody AttendanceRequest attendanceRequest) {
 		Employee employee = employeeService.findById(attendanceRequest.getEmployeeId());
 		if (employee == null) {
