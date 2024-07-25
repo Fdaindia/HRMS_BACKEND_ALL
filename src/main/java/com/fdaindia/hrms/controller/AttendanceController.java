@@ -22,9 +22,9 @@ public class AttendanceController {
 	private AttendanceService attendanceService;
 	@Autowired
 	private EmployeeService employeeService;
-	//This is main brnach 
+	//This is main branch 
 	@CrossOrigin()
-	@PostMapping("/punch-in")
+	@PostMapping("/punch")
 	public ResponseEntity<?> punchIn(@RequestBody AttendanceRequest attendanceRequest) {
 		Employee employee = employeeService.findById(attendanceRequest.getEmployeeId());
 		if (employee == null) {
