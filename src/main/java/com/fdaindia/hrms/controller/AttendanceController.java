@@ -24,23 +24,7 @@ public class AttendanceController {
 	private EmployeeService employeeService;
 	//This is the code of Rudraa
 	@CrossOrigin()
-	@PostMapping("/punch-in")
-	public ResponseEntity<?> punchIn(@RequestBody AttendanceRequest attendanceRequest) {
-		Employee employee = employeeService.findById(attendanceRequest.getEmployeeId());
-		if (employee == null) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Employee not found");
-		}
-		try {
-			Attendance attendance = attendanceService.punchIn(employee, attendanceRequest.getLatitude(),
-					attendanceRequest.getLongitude(), attendanceRequest.getPunchInAction(),
-					attendanceRequest.getRemarks());
-			return ResponseEntity.status(HttpStatus.CREATED).body(attendance);
-		} catch (IllegalArgumentException e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
-		} catch (IllegalStateException e) {
-			return ResponseEntity.badRequest().body(e.getMessage());
-		}
-	}
+
 
 	@CrossOrigin()
 	@PostMapping("/punch-out")
