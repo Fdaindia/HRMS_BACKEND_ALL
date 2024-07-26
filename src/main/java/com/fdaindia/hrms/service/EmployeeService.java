@@ -12,8 +12,9 @@ import com.fdaindia.hrms.response.ReportResponse;
 
 public interface EmployeeService {
 
-	// Add a new employee or update an existing employee
-	Map<String, Object> addOrUpdate(Employee employee);
+	public Map<String, Object> addEmployee(Employee employee);
+
+	public Map<String, Object> updateEmployee(Employee employee);
 
 	// Get an employee by their ID
 	Employee getEmployeeById(Long employeeId);

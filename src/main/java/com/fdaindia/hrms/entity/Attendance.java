@@ -51,7 +51,7 @@ public class Attendance {
 	private String punchOutAction;
 
 	@JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
 	

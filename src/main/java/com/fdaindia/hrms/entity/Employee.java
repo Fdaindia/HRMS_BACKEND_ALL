@@ -16,6 +16,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 //import jakarta.validation.constraints.Email;
 //import jakarta.validation.constraints.NotBlank;
 //import jakarta.validation.constraints.NotNull;
@@ -24,12 +26,15 @@ import jakarta.persistence.Table;
 //import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Data
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "employee")
 public class Employee {
 
@@ -129,7 +134,7 @@ public class Employee {
 	private String role;
 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "employee")
 	private List<Attendance> attendance;
 
 	@OneToOne(fetch = FetchType.EAGER)

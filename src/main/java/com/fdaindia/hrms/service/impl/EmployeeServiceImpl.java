@@ -15,6 +15,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -40,19 +41,48 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private ModelMapper modelMapper;
 
 	@Override
-	public Map<String, Object> addOrUpdate(Employee employee) {
+	public Map<String, Object> addEmployee(Employee employee) {
 		Map<String, Object> response = new HashMap<>();
 
-		// Check if username already exists
-		Optional<Employee> existingEmployee = employeeRepo.findById(employee.getId());
-		if (existingEmployee.isPresent() && !existingEmployee.get().getId().equals(employee.getId())) {
-			response.put("status", "FAILURE");
-			response.put("message", "Username already exists.");
-		} else {
-			// Save employee if username is unique
-			Employee savedEmployee = employeeRepo.save(employee);
-			response.put("data", savedEmployee);
+		// Check if an employee with the same ID already exists
+		Optional<Employee> existingEmployeeOpt = employeeRepo.findById(employee.getId());
+		if (existingEmployeeOpt.isPresent()) {
+			response.put("status", "ERROR");
+			response.put("message", "Employee with this ID already exists.");
+			return response;
+		}
+
+		// Save new employee
+		this.employeeRepo.save(employee);
+		response.put("status", "SUCCESS");
+		return response;
+	}
+
+	@Override
+	public Map<String, Object> updateEmployee(Employee employee) {
+		Map<String, Object> response = new HashMap<>();
+
+		// Check if the employee exists
+		Optional<Employee> existingEmployees = employeeRepo.findById(employee.getId());
+		if (existingEmployees.isPresent()) {
+			Employee existingEmployee = existingEmployees.get();
+
+			modelMapper.addMappings(new PropertyMap<Employee, Employee>() {
+				@Override
+				protected void configure() {
+					skip(destination.getUsername());
+					skip(destination.getEmail());
+					skip(destination.getPassword());
+				}
+			});
+			modelMapper.map(employee, existingEmployee);
+
+			// Save updated employee
+			this.employeeRepo.save(existingEmployee);
 			response.put("status", "SUCCESS");
+		} else {
+			response.put("status", "ERROR");
+			response.put("message", "Employee not found.");
 		}
 
 		return response;
@@ -64,7 +94,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 			return new ResourceNotFoundException("Employee", "employeeId", employeeId);
 		});
 	}
-
 
 	@Override
 	public void deleteEmployee(Long employeeId) {
@@ -143,7 +172,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public List<Employee> getAll() {
-		
+
 		return employeeRepo.findAll();
 	}
 }
