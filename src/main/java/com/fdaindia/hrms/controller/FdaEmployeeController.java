@@ -1,5 +1,8 @@
 package com.fdaindia.hrms.controller;
 
+import java.util.Date;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,17 +14,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.fdaindia.hrms.entity.Employee;
 import com.fdaindia.hrms.request.UserRequest;
 import com.fdaindia.hrms.response.EmployeeResponseDTO;
 import com.fdaindia.hrms.response.UserResponse;
 import com.fdaindia.hrms.service.FdaEmployeeService;
 import com.fdaindia.hrms.service.impl.FdaEmployeeServiceImpl;
+import com.fdaindia.hrms.tokenconfig.JwtTokenUtil;
 
 @RestController
 @RequestMapping("/hrms/emp")
 public class FdaEmployeeController {
 
+	@Autowired
+	JwtTokenUtil jwtTokenUtil;
 	@Autowired
 	private FdaEmployeeService fdaEmployeeService;
 	@Autowired
@@ -84,21 +91,50 @@ public class FdaEmployeeController {
 		return response;
 	}
 
-	@CrossOrigin()
+//	@CrossOrigin()
+//	@PostMapping("/hrmslogin")
+//	public UserResponse hrmsUser(@RequestBody UserRequest request) {
+//		UserResponse response = new UserResponse();
+//		System.out.println(request.getUsername() + " " + request.getPassword());
+//		if (request.getUsername().equals("ADMIN") && request.getPassword().equals("Fdaindia@2024")) {
+//			response.setStatus(true);
+//			response.setRole("ADMIN");
+//			response.setUsername(request.getUsername());
+//			response.setMessage("HRMS Login Successful");
+//		} else {
+//			response.setStatus(false);
+//			response.setMessage("Failed");
+//			response.setUsername(request.getUsername());
+//		}
+//		return response;
+//	}
 	@PostMapping("/hrmslogin")
-	public UserResponse hrmsUser(@RequestBody UserRequest request) {
-		UserResponse response = new UserResponse();
-		System.out.println(request.getUsername() + " " + request.getPassword());
-		if (request.getUsername().equals("ADMIN") && request.getPassword().equals("Fdaindia@2024")) {
-			response.setStatus(true);
-			response.setRole("ADMIN");
-			response.setUsername(request.getUsername());
-			response.setMessage("HRMS Login Successful");
-		} else {
-			response.setStatus(false);
-			response.setMessage("Failed");
-			response.setUsername(request.getUsername());
-		}
-		return response;
-	}
-}
+    public UserResponse hrmsUser(@RequestBody UserRequest request) {
+        UserResponse response = new UserResponse();
+        System.out.println(request.getUsername() + " " + request.getPassword());
+        if (request.getUsername().equals("ADMIN") && request.getPassword().equals("Fdaindia@2024")) {
+            response.setStatus(true);
+            String role = "ADMIN"; // Admin role
+            String sessionId = UUID.randomUUID().toString();
+            Date sessionExpiry = new Date(System.currentTimeMillis() + JwtTokenUtil.JWT_TOKEN_VALIDITY * 1000);
+
+            // Initialize the Employee object properly
+            Employee employee = new Employee();
+            employee.setUsername(request.getUsername());
+            employee.setRole(role); // Set the role
+        EmployeeResponseDTO empDto=new EmployeeResponseDTO();
+            // Generate JWT token with session ID and expiry
+            String token = jwtTokenUtil.generateTokenWithSessionId(employee, sessionId, sessionExpiry);
+            response.setToken(token);
+            response.setSessionId(sessionId);
+            response.setSessionExpiry(sessionExpiry);
+            response.setRole(role); // Set the role
+            response.setMessage("success");
+            response.setUsername(employee.getUsername());
+            response.setObject(empDto);
+        } else {
+            response.setStatus(false);
+            response.setMessage("Failed");
+        }
+        return response;
+    }}

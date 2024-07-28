@@ -38,6 +38,11 @@ public class LeaveRequestController {
 		return leaveRequestService.getAllLeaveRequests();
 	}
 
+	@GetMapping("/test1")
+	public String user() {
+		System.out.println("Employee hit");
+		return "Employee hit";
+	}
 	@CrossOrigin()
 	@GetMapping("/{id}")
 	public LeaveRequest getLeaveRequestById(@PathVariable Long id) {

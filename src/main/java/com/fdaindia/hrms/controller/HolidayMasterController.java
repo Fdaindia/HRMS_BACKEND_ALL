@@ -19,6 +19,12 @@ import com.fdaindia.hrms.service.HolidayMasterService;
 @RequestMapping(value = "/holidaymaster")
 public class HolidayMasterController {
 
+	
+	@GetMapping("/test")
+	public String user() {
+		System.out.println("Employee hit");
+		return "Employee hit";
+	}
 	@Autowired
 	private HolidayMasterService holidayMasterService;
 

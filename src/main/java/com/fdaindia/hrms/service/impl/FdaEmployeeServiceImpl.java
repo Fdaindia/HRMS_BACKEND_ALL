@@ -139,7 +139,38 @@ public class FdaEmployeeServiceImpl implements FdaEmployeeService {
 			return "Email not found.";
 		}
 	}
+	 @Override
+	    public EmployeeResponseDTO convertToDto(Employee employee) {
+	        EmployeeResponseDTO empDto = new EmployeeResponseDTO();
+	        empDto.setId(employee.getId());
+	        empDto.setName(employee.getName());
+	       
+	        empDto.setUnder(employee.getUnder());
+	        empDto.setDateOfJoining(employee.getDateOfJoining());
+	        empDto.setEmployeeNumber(employee.getEmployeeNumber());
+	        empDto.setWorkAs(employee.getWorkAs());
+	        empDto.setLocation(employee.getLocation());
+	        empDto.setSomeDate(employee.getSomeDate());
+	        empDto.setDob(employee.getDob());
+	        empDto.setBloodGroup(employee.getBloodGroup());
+	        empDto.setFatherName(employee.getFatherName());
+	        empDto.setMotherName(employee.getMotherName());
+	        empDto.setAddress(employee.getAddress());
+	        empDto.setContactNumber(employee.getContactNumber());
+	        empDto.setEmail(employee.getEmail());
+	        empDto.setBankName(employee.getBankName());
+	        empDto.setBranch(employee.getBranch());
+	        empDto.setBankAccountNumber(employee.getBankAccountNumber());
+	        empDto.setPancardNumber(employee.getPancardNumber());
+	        empDto.setTotalSalary(employee.getTotalSalary());
+	       
+	        // Set department and designation if needed
+	        // empDto.setDepartment(...);
+	        // empDto.setDesignation(...);
 
+	        return empDto;
+	    }
+	
 	@Override
 	public String verifyOtpAndResetPassword(String email, String otp, String newPassword, String confirmPassword) {
 		if (!newPassword.equals(confirmPassword)) {
@@ -201,4 +232,6 @@ public class FdaEmployeeServiceImpl implements FdaEmployeeService {
 			throw new RuntimeException("Employee not found with id " + id);
 		}
 	}
+	
+	
 }

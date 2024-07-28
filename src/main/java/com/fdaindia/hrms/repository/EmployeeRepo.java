@@ -30,5 +30,5 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long> {
 	List<ReportResponse> fetchReportResponses();
 
 	Optional<Employee> findById(Long id);
-	
+	Employee findByUsername(String username);
 }

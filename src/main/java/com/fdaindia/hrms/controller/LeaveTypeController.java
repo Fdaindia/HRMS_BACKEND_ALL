@@ -21,9 +21,15 @@ import com.fdaindia.hrms.service.LeaveTypeService;
 @RequestMapping("/api/leave_type")
 public class LeaveTypeController {
 
+	
+
 	@Autowired
 	private LeaveTypeService leaveTypeService;
-
+	@GetMapping("/test2")
+	public String user() {
+		System.out.println("Employee hit");
+		return "Employee hit";
+	}
 	@CrossOrigin()
 	@GetMapping
 	public FinalResponse getAllLeaveTypes() {

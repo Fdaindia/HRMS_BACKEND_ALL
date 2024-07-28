@@ -22,6 +22,12 @@ import com.fdaindia.hrms.service.HRPolicyService;
 @RequestMapping(value = "/hrPolicy")
 public class HRPolicyController {
 
+	
+	@GetMapping("/test")
+	public String user() {
+		System.out.println("Employee hit");
+		return "Employee hit";
+	}
 	@Autowired
 	private HRPolicyService hrPolicyService;
 

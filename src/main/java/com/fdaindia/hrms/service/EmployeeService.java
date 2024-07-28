@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.data.domain.Pageable;
 
 import com.fdaindia.hrms.entity.Employee;
+import com.fdaindia.hrms.response.EmployeeResponseDTO;
 import com.fdaindia.hrms.response.ReportResponse;
 
 public interface EmployeeService {
@@ -23,7 +24,7 @@ public interface EmployeeService {
 
 	// Delete an employee by their ID
 	void deleteEmployee(Long categoryId);
-
+	 
 	// Search an employee
 	public List<Employee> searchEmployee(String query, Pageable pageable);
 

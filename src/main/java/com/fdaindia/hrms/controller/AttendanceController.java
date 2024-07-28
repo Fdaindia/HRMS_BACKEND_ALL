@@ -6,6 +6,8 @@ import com.fdaindia.hrms.request.AttendanceRequest;
 import com.fdaindia.hrms.response.AttendanceResponseDTO;
 import com.fdaindia.hrms.service.AttendanceService;
 import com.fdaindia.hrms.service.EmployeeService;
+import com.fdaindia.hrms.tokenconfig.JwtTokenUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,8 @@ import java.time.LocalDate;
 @RequestMapping("/api/attendance")
 public class AttendanceController {
 
+	@Autowired
+	JwtTokenUtil jwtTokenUtil;
 	@Autowired
 	private AttendanceService attendanceService;
 	@Autowired

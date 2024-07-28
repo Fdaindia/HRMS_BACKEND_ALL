@@ -22,7 +22,13 @@ import com.fdaindia.hrms.service.DepartmentService;
 @RestController
 @RequestMapping("/department")
 public class DepartmentController {
-
+	
+	
+	@GetMapping("/test")
+	public String user() {
+		System.out.println("Employee hit");
+		return "Employee hit";
+	}
 	@Autowired
 	private DepartmentService departmentService;
 

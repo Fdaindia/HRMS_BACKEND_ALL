@@ -1,5 +1,7 @@
 package com.fdaindia.hrms.response;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -43,6 +45,28 @@ public class UserResponse {
     private Object object;
     private String username;
     private String role;
+    private String token;
+    private String sessionId;
+    private Date sessionExpiry;
+    
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
+	}
+	public String getSessionId() {
+		return sessionId;
+	}
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
+	public Date getSessionExpiry() {
+		return sessionExpiry;
+	}
+	public void setSessionExpiry(Date sessionExpiry) {
+		this.sessionExpiry = sessionExpiry;
+	}
     
 }
 

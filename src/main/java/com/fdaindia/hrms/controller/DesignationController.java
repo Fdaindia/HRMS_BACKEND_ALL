@@ -23,6 +23,12 @@ import com.fdaindia.hrms.service.DesignationService;
 @RequestMapping("/designation")
 public class DesignationController {
 
+	
+	@GetMapping("/test")
+	public String user() {
+		System.out.println("Employee hit");
+		return "Employee hit";
+	}
 	@Autowired
 	private DesignationService designationService;
 

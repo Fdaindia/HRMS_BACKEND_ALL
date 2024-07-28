@@ -34,6 +34,12 @@ import com.fdaindia.hrms.service.EmployeeService;
 @RequestMapping("/employee")
 public class EmployeeController {
 
+	
+	@GetMapping("/test")
+	public String user() {
+		System.out.println("Employee hit");
+		return "Employee hit";
+	}
 	@Autowired
 	private EmployeeService employeeService;
 
