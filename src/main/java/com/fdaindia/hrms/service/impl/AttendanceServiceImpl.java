@@ -295,8 +295,8 @@ public class AttendanceServiceImpl implements AttendanceService {
         return attendanceRepository.save(attendance);
     }
 
-//    @Scheduled(cron = "0 0 18 * * ?") // Runs every day at 6 PM
-    @Scheduled(cron = "0 30 16 * * ?")
+   @Scheduled(cron = "0 0 18 * * ?") // Runs every day at 6 PM
+   
     public void autoPunchOutEmployees() {
         List<Employee> employees = employeeRepository.findAll();
 
