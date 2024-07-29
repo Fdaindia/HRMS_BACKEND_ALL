@@ -23,6 +23,148 @@ public class HrPolicy {
 	@Column(name = "id")
 	private Long id;
 
+	public HrPolicy(Long id, LocalTime officeStartTime, LocalTime officeEndTime, Integer workingHour,
+			Integer minHoursForHalfDay, Integer lunchDurationMinutes, Integer breakDurationMinutes,
+			LocalTime lunchStartTime, LocalTime lunchEndTime, String emailId, Integer salaryReportDay,
+			Integer minWorkingHours, LocalTime intimeReminder, LocalTime outtimeReminder, String weekOff) {
+		super();
+		this.id = id;
+		this.officeStartTime = officeStartTime;
+		this.officeEndTime = officeEndTime;
+		this.workingHour = workingHour;
+		this.minHoursForHalfDay = minHoursForHalfDay;
+		this.lunchDurationMinutes = lunchDurationMinutes;
+		this.breakDurationMinutes = breakDurationMinutes;
+		this.lunchStartTime = lunchStartTime;
+		this.lunchEndTime = lunchEndTime;
+		this.emailId = emailId;
+		this.salaryReportDay = salaryReportDay;
+		this.minWorkingHours = minWorkingHours;
+		this.intimeReminder = intimeReminder;
+		this.outtimeReminder = outtimeReminder;
+		this.weekOff = weekOff;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public LocalTime getOfficeStartTime() {
+		return officeStartTime;
+	}
+
+	public void setOfficeStartTime(LocalTime officeStartTime) {
+		this.officeStartTime = officeStartTime;
+	}
+
+	public LocalTime getOfficeEndTime() {
+		return officeEndTime;
+	}
+
+	public void setOfficeEndTime(LocalTime officeEndTime) {
+		this.officeEndTime = officeEndTime;
+	}
+
+	public Integer getWorkingHour() {
+		return workingHour;
+	}
+
+	public void setWorkingHour(Integer workingHour) {
+		this.workingHour = workingHour;
+	}
+
+	public Integer getMinHoursForHalfDay() {
+		return minHoursForHalfDay;
+	}
+
+	public void setMinHoursForHalfDay(Integer minHoursForHalfDay) {
+		this.minHoursForHalfDay = minHoursForHalfDay;
+	}
+
+	public Integer getLunchDurationMinutes() {
+		return lunchDurationMinutes;
+	}
+
+	public void setLunchDurationMinutes(Integer lunchDurationMinutes) {
+		this.lunchDurationMinutes = lunchDurationMinutes;
+	}
+
+	public Integer getBreakDurationMinutes() {
+		return breakDurationMinutes;
+	}
+
+	public void setBreakDurationMinutes(Integer breakDurationMinutes) {
+		this.breakDurationMinutes = breakDurationMinutes;
+	}
+
+	public LocalTime getLunchStartTime() {
+		return lunchStartTime;
+	}
+
+	public void setLunchStartTime(LocalTime lunchStartTime) {
+		this.lunchStartTime = lunchStartTime;
+	}
+
+	public LocalTime getLunchEndTime() {
+		return lunchEndTime;
+	}
+
+	public void setLunchEndTime(LocalTime lunchEndTime) {
+		this.lunchEndTime = lunchEndTime;
+	}
+
+	public String getEmailId() {
+		return emailId;
+	}
+
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+
+	public Integer getSalaryReportDay() {
+		return salaryReportDay;
+	}
+
+	public void setSalaryReportDay(Integer salaryReportDay) {
+		this.salaryReportDay = salaryReportDay;
+	}
+
+	public Integer getMinWorkingHours() {
+		return minWorkingHours;
+	}
+
+	public void setMinWorkingHours(Integer minWorkingHours) {
+		this.minWorkingHours = minWorkingHours;
+	}
+
+	public LocalTime getIntimeReminder() {
+		return intimeReminder;
+	}
+
+	public void setIntimeReminder(LocalTime intimeReminder) {
+		this.intimeReminder = intimeReminder;
+	}
+
+	public LocalTime getOuttimeReminder() {
+		return outtimeReminder;
+	}
+
+	public void setOuttimeReminder(LocalTime outtimeReminder) {
+		this.outtimeReminder = outtimeReminder;
+	}
+
+	public String getWeekOff() {
+		return weekOff;
+	}
+
+	public void setWeekOff(String weekOff) {
+		this.weekOff = weekOff;
+	}
+
 	@Column(name = "office_start_time")
 	private LocalTime officeStartTime;
 

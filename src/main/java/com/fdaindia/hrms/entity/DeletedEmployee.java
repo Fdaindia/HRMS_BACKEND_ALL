@@ -25,8 +25,213 @@ public class DeletedEmployee {
 	@Column(name = "employee_id")
 	private Long id;
 
+	public DeletedEmployee(Long id, Long originalId, LocalDateTime deletionTime, String username, String under,
+			String dateOfJoining, String employeeNumber, String function, String location, String somedate, Date dob,
+			String bloodGroup, String fatherName, String motherName, String address, String contactNumber, String email,
+			String bankName, String branch, String bankAccountNumber, String pancardNumber, Long totalSalary) {
+		super();
+		this.id = id;
+		this.originalId = originalId;
+		this.deletionTime = deletionTime;
+		this.username = username;
+		this.under = under;
+		this.dateOfJoining = dateOfJoining;
+		this.employeeNumber = employeeNumber;
+		this.function = function;
+		this.location = location;
+		this.somedate = somedate;
+		this.dob = dob;
+		this.bloodGroup = bloodGroup;
+		this.fatherName = fatherName;
+		this.motherName = motherName;
+		this.address = address;
+		this.contactNumber = contactNumber;
+		this.email = email;
+		this.bankName = bankName;
+		this.branch = branch;
+		this.bankAccountNumber = bankAccountNumber;
+		this.pancardNumber = pancardNumber;
+		this.totalSalary = totalSalary;
+	}
+
 	@Column(name = "original_id")
 	private Long originalId;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getOriginalId() {
+		return originalId;
+	}
+
+	public void setOriginalId(Long originalId) {
+		this.originalId = originalId;
+	}
+
+	public LocalDateTime getDeletionTime() {
+		return deletionTime;
+	}
+
+	public void setDeletionTime(LocalDateTime deletionTime) {
+		this.deletionTime = deletionTime;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getUnder() {
+		return under;
+	}
+
+	public void setUnder(String under) {
+		this.under = under;
+	}
+
+	public String getDateOfJoining() {
+		return dateOfJoining;
+	}
+
+	public void setDateOfJoining(String dateOfJoining) {
+		this.dateOfJoining = dateOfJoining;
+	}
+
+	public String getEmployeeNumber() {
+		return employeeNumber;
+	}
+
+	public void setEmployeeNumber(String employeeNumber) {
+		this.employeeNumber = employeeNumber;
+	}
+
+	public String getFunction() {
+		return function;
+	}
+
+	public void setFunction(String function) {
+		this.function = function;
+	}
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public String getSomedate() {
+		return somedate;
+	}
+
+	public void setSomedate(String somedate) {
+		this.somedate = somedate;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
+	public String getBloodGroup() {
+		return bloodGroup;
+	}
+
+	public void setBloodGroup(String bloodGroup) {
+		this.bloodGroup = bloodGroup;
+	}
+
+	public String getFatherName() {
+		return fatherName;
+	}
+
+	public void setFatherName(String fatherName) {
+		this.fatherName = fatherName;
+	}
+
+	public String getMotherName() {
+		return motherName;
+	}
+
+	public void setMotherName(String motherName) {
+		this.motherName = motherName;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getContactNumber() {
+		return contactNumber;
+	}
+
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getBankName() {
+		return bankName;
+	}
+
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+
+	public String getBranch() {
+		return branch;
+	}
+
+	public void setBranch(String branch) {
+		this.branch = branch;
+	}
+
+	public String getBankAccountNumber() {
+		return bankAccountNumber;
+	}
+
+	public void setBankAccountNumber(String bankAccountNumber) {
+		this.bankAccountNumber = bankAccountNumber;
+	}
+
+	public String getPancardNumber() {
+		return pancardNumber;
+	}
+
+	public void setPancardNumber(String pancardNumber) {
+		this.pancardNumber = pancardNumber;
+	}
+
+	public Long getTotalSalary() {
+		return totalSalary;
+	}
+
+	public void setTotalSalary(Long totalSalary) {
+		this.totalSalary = totalSalary;
+	}
 
 	@Column(name = "deletion_time")
 	private LocalDateTime deletionTime;

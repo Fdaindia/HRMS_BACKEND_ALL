@@ -2,8 +2,11 @@ package com.fdaindia.hrms.service;
 
 import com.fdaindia.hrms.entity.Attendance;
 import com.fdaindia.hrms.entity.Employee;
+import com.fdaindia.hrms.response.AttendanceResponseDTO;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.util.List;
 
 public interface AttendanceService {
@@ -15,6 +18,6 @@ public interface AttendanceService {
     LocalDate getCurrentDate();
     boolean hasPunchedOutToday(Employee employee);
     List<Attendance> findAttendanceForLast30Days(Employee employee);
-    List<Attendance> findAll();
-    
+    List<AttendanceResponseDTO> findAll();
+    String getTotalWorkingHoursForMonth(Employee employee, YearMonth yearMonth);
 }

@@ -24,6 +24,55 @@ public class Designation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	public Designation(Long id, String designation, String shortName, String description, Department department) {
+		super();
+		this.id = id;
+		this.designation = designation;
+		this.shortName = shortName;
+		this.description = description;
+		this.department = department;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+
+	public String getShortName() {
+		return shortName;
+	}
+
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+
 	@Column(name = "designation")
 	private String designation;
 
