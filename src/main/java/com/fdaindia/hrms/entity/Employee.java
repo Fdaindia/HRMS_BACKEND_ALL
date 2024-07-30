@@ -3,6 +3,7 @@ package com.fdaindia.hrms.entity;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -42,7 +43,7 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "employee_id")
 	private Long id;
-	
+
 	@Column(name = "name")
 	private String name;
 //	@NotBlank(message = "Username is mandatory")
@@ -144,4 +145,8 @@ public class Employee {
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "designation_id", insertable = true, updatable = false)
 	private Designation designation;
+
+	@JsonBackReference
+	@OneToOne(mappedBy = "employee")
+	private Onboarding onboarding;
 }
