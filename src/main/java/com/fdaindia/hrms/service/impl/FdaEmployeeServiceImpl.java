@@ -6,17 +6,21 @@ import com.fdaindia.hrms.response.EmployeeResponseDTO;
 import com.fdaindia.hrms.response.UserResponse;
 import com.fdaindia.hrms.service.EmailService;
 import com.fdaindia.hrms.service.FdaEmployeeService;
+import com.fdaindia.hrms.tokenconfig.JwtTokenUtil;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.Optional;
 import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @Service
 public class FdaEmployeeServiceImpl implements FdaEmployeeService {
-
+	@Autowired
+	JwtTokenUtil jwtTokenUtil;
 	@Autowired
 	private EmailService emailService;
 
@@ -64,60 +68,45 @@ public class FdaEmployeeServiceImpl implements FdaEmployeeService {
 
 	@Override
 	public UserResponse authenticate(String username, String password) {
-		Optional<Employee> employeeOpt = employeeRepository.findByUsername(username);
-		UserResponse response = new UserResponse();
+	    Optional<Employee> employeeOpt = employeeRepository.findByUsername(username);
+	    UserResponse response = new UserResponse();
 
-		if (employeeOpt.isPresent()) {
-			Employee employee = employeeOpt.get();
-			if (employee.getPassword().equals(password)) {
-				// Create DTO and map fields
-				EmployeeResponseDTO employeeDTO = new EmployeeResponseDTO();
-				employeeDTO.setId(employee.getId());
-				employeeDTO.setName(employee.getName());
-				employeeDTO.setUsername(employee.getUsername());
-				employeeDTO.setUnder(employee.getUnder());
-				employeeDTO.setDateOfJoining(employee.getDateOfJoining());
-				employeeDTO.setEmployeeNumber(employee.getEmployeeNumber());
-				employeeDTO.setWorkAs(employee.getWorkAs());
-				employeeDTO.setLocation(employee.getLocation());
-				employeeDTO.setSomeDate(employee.getSomeDate());
-				employeeDTO.setDob(employee.getDob());
-				employeeDTO.setBloodGroup(employee.getBloodGroup());
-				employeeDTO.setFatherName(employee.getFatherName());
-				employeeDTO.setMotherName(employee.getMotherName());
-				employeeDTO.setAddress(employee.getAddress());
-				employeeDTO.setContactNumber(employee.getContactNumber());
-				employeeDTO.setEmail(employee.getEmail());
-				employeeDTO.setBankName(employee.getBankName());
-				employeeDTO.setBranch(employee.getBranch());
-				employeeDTO.setBankAccountNumber(employee.getBankAccountNumber());
-				employeeDTO.setPancardNumber(employee.getPancardNumber());
-				employeeDTO.setTotalSalary(employee.getTotalSalary());
-				employeeDTO.setRole(employee.getRole());
-				// Set department and designation if needed
-				// employeeDTO.setDepartment(...);
-				// employeeDTO.setDesignation(...);
+	    if (employeeOpt.isPresent()) {
+	        Employee employee = employeeOpt.get();
+	        if (employee.getPassword().equals(password)) {
+	            // Create DTO and map fields
+	            EmployeeResponseDTO employeeDTO = convertToDto(employee);
 
-				response.setStatus(true);
-				response.setMessage("Login successful");
-				response.setObject(employeeDTO); // Set the DTO instead of the entity
-				response.setUsername(username);
-				response.setRole(employee.getRole());
-			} else {
-				response.setStatus(false);
-				response.setMessage("Invalid username or password");
-				response.setObject(null);
-				response.setUsername(null);
-				response.setRole(null);
-			}
-		} else {
-			response.setStatus(false);
-			response.setMessage("Invalid username or password");
-			response.setObject(null);
-			response.setUsername(null);
-			response.setRole(null);
-		}
-		return response;
+	            // Generate session ID and expiry date
+	            String sessionId = UUID.randomUUID().toString();
+	            Date sessionExpiry = new Date(System.currentTimeMillis() + JwtTokenUtil.JWT_TOKEN_VALIDITY * 1000);
+
+	            // Generate JWT token with session ID and expiry
+	            String token = jwtTokenUtil.generateTokenWithSessionId(employee, sessionId, sessionExpiry);
+
+	            response.setStatus(true);
+	            response.setMessage("Login successful");
+	            response.setObject(employeeDTO); // Set the DTO instead of the entity
+	            response.setUsername(username);
+	            response.setRole(employee.getRole());
+	            response.setToken(token);
+	            response.setSessionId(sessionId);
+	            response.setSessionExpiry(sessionExpiry);
+	        } else {
+	            response.setStatus(false);
+	            response.setMessage("Invalid username or password");
+	            response.setObject(null);
+	            response.setUsername(null);
+	            response.setRole(null);
+	        }
+	    } else {
+	        response.setStatus(false);
+	        response.setMessage("Invalid username or password");
+	        response.setObject(null);
+	        response.setUsername(null);
+	        response.setRole(null);
+	    }
+	    return response;
 	}
 
 	@Override

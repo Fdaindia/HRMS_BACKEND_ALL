@@ -69,27 +69,27 @@ public class FdaEmployeeController {
 	@CrossOrigin()
 	@PostMapping("/login")
 	public UserResponse loginEmployee(@RequestParam String username, @RequestParam String password) {
-		UserResponse response = fdaEmployeeService.authenticate(username, password);
+	    UserResponse response = fdaEmployeeService.authenticate(username, password);
 
-		if (response.isStatus()) {
-			// Get the EmployeeResponseDTO from the response object
-			EmployeeResponseDTO employeeDTO = (EmployeeResponseDTO) response.getObject();
-			if (employeeDTO != null) {
+	    if (response.isStatus()) {
+	        // Get the EmployeeResponseDTO from the response object
+	        EmployeeResponseDTO employeeDTO = (EmployeeResponseDTO) response.getObject();
+	        if (employeeDTO != null) {
+	            response.setObject(employeeDTO); // Set the EmployeeResponseDTO in the response
+	            response.setRole("Employee"); // Set the role in the UserResponse
+	            response.setMessage("Login Successful");
+	            response.setStatus(true);
+	        }
+	    } else {
+	        response.setMessage("Invalid username or password");
+	        response.setObject(null); // Ensure object is null on failure
+	        response.setRole(null); // Ensure role is null on failure
+	        response.setStatus(false);
+	    }
 
-				response.setObject(employeeDTO); // Set the EmployeeResponseDTO in the response
-				response.setRole("Employee"); // Set the role in the UserResponse
-				response.setMessage("Login Successful");
-				response.setStatus(true);
-			}
-		} else {
-			response.setMessage("Invalid username or password");
-			response.setObject(null); // Ensure object is null on failure
-			response.setRole(null); // Ensure role is null on failure
-			response.setStatus(false);
-		}
-
-		return response;
+	    return response;
 	}
+
 
 //	@CrossOrigin()
 //	@PostMapping("/hrmslogin")
