@@ -86,7 +86,12 @@ public class JwtTokenFilter implements Filter {
             "/hrms/emp/registration",
             "/hrms/emp/login",
             "/hrms/emp/forgot-password",
-            "/hrms/emp/reset-password"
+            "/hrms/emp/reset-password",
+            "/hrms/emp/managerLogin",
+            "/hrms/emp/hrLogin",
+           "/hrms/emp/administratorLogin",
+            "/hrms/emp/accountLogin"
+            
         );
         return urls.contains(url);
     }

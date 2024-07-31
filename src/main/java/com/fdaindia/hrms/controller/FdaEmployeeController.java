@@ -108,6 +108,126 @@ public class FdaEmployeeController {
 //		}
 //		return response;
 //	}
+	@PostMapping("/managerLogin")
+    public UserResponse Manager(@RequestBody UserRequest request) {
+        UserResponse response = new UserResponse();
+        System.out.println(request.getUsername() + " " + request.getPassword());
+        if (request.getUsername().equals("Manager") && request.getPassword().equals("Manager@2024")) {
+            response.setStatus(true);
+            String role = "Manager"; // Admin role
+            String sessionId = UUID.randomUUID().toString();
+            Date sessionExpiry = new Date(System.currentTimeMillis() + JwtTokenUtil.JWT_TOKEN_VALIDITY * 1000);
+
+            // Initialize the Employee object properly
+            Employee employee = new Employee();
+            employee.setUsername(request.getUsername());
+            employee.setRole(role); // Set the role
+        EmployeeResponseDTO empDto=new EmployeeResponseDTO();
+            // Generate JWT token with session ID and expiry
+            String token = jwtTokenUtil.generateTokenWithSessionId(employee, sessionId, sessionExpiry);
+            response.setToken(token);
+            response.setSessionId(sessionId);
+            response.setSessionExpiry(sessionExpiry);
+            response.setRole(role); // Set the role
+            response.setMessage("success");
+            response.setUsername(employee.getUsername());
+            response.setObject(empDto);
+        } else {
+            response.setStatus(false);
+            response.setMessage("Failed");
+        }
+        return response;
+    }
+	@PostMapping("/accountLogin")
+    public UserResponse accountLogin(@RequestBody UserRequest request) {
+        UserResponse response = new UserResponse();
+        System.out.println(request.getUsername() + " " + request.getPassword());
+        if (request.getUsername().equals("Account") && request.getPassword().equals("Account@2024")) {
+            response.setStatus(true);
+            String role = "Manager"; // Admin role
+            String sessionId = UUID.randomUUID().toString();
+            Date sessionExpiry = new Date(System.currentTimeMillis() + JwtTokenUtil.JWT_TOKEN_VALIDITY * 1000);
+
+            // Initialize the Employee object properly
+            Employee employee = new Employee();
+            employee.setUsername(request.getUsername());
+            employee.setRole(role); // Set the role
+        EmployeeResponseDTO empDto=new EmployeeResponseDTO();
+            // Generate JWT token with session ID and expiry
+            String token = jwtTokenUtil.generateTokenWithSessionId(employee, sessionId, sessionExpiry);
+            response.setToken(token);
+            response.setSessionId(sessionId);
+            response.setSessionExpiry(sessionExpiry);
+            response.setRole(role); // Set the role
+            response.setMessage("success");
+            response.setUsername(employee.getUsername());
+            response.setObject(empDto);
+        } else {
+            response.setStatus(false);
+            response.setMessage("Failed");
+        }
+        return response;
+    }
+	@PostMapping("/administratorLogin")
+    public UserResponse administratorLogin(@RequestBody UserRequest request) {
+        UserResponse response = new UserResponse();
+        System.out.println(request.getUsername() + " " + request.getPassword());
+        if (request.getUsername().equals("Administrator") && request.getPassword().equals("Administrator@2024")) {
+            response.setStatus(true);
+            String role = "Administrator"; // Admin role
+            String sessionId = UUID.randomUUID().toString();
+            Date sessionExpiry = new Date(System.currentTimeMillis() + JwtTokenUtil.JWT_TOKEN_VALIDITY * 1000);
+
+            // Initialize the Employee object properly
+            Employee employee = new Employee();
+            employee.setUsername(request.getUsername());
+            employee.setRole(role); // Set the role
+        EmployeeResponseDTO empDto=new EmployeeResponseDTO();
+            // Generate JWT token with session ID and expiry
+            String token = jwtTokenUtil.generateTokenWithSessionId(employee, sessionId, sessionExpiry);
+            response.setToken(token);
+            response.setSessionId(sessionId);
+            response.setSessionExpiry(sessionExpiry);
+            response.setRole(role); // Set the role
+            response.setMessage("success");
+            response.setUsername(employee.getUsername());
+            response.setObject(empDto);
+        } else {
+            response.setStatus(false);
+            response.setMessage("Failed");
+        }
+        return response;
+    }
+	@PostMapping("/hrLogin")
+    public UserResponse hrLogin(@RequestBody UserRequest request) {
+        UserResponse response = new UserResponse();
+        System.out.println(request.getUsername() + " " + request.getPassword());
+        if (request.getUsername().equals("Hr") && request.getPassword().equals("Hr@2024")) {
+            response.setStatus(true);
+            String role = "Hr"; // Admin role
+            String sessionId = UUID.randomUUID().toString();
+            Date sessionExpiry = new Date(System.currentTimeMillis() + JwtTokenUtil.JWT_TOKEN_VALIDITY * 1000);
+
+            // Initialize the Employee object properly
+            Employee employee = new Employee();
+            employee.setUsername(request.getUsername());
+            employee.setRole(role); // Set the role
+        EmployeeResponseDTO empDto=new EmployeeResponseDTO();
+            // Generate JWT token with session ID and expiry
+            String token = jwtTokenUtil.generateTokenWithSessionId(employee, sessionId, sessionExpiry);
+            response.setToken(token);
+            response.setSessionId(sessionId);
+            response.setSessionExpiry(sessionExpiry);
+            response.setRole(role); // Set the role
+            response.setMessage("success");
+            response.setUsername(employee.getUsername());
+            response.setObject(empDto);
+        } else {
+            response.setStatus(false);
+            response.setMessage("Failed");
+        }
+        return response;
+    }
 	@PostMapping("/hrmslogin")
     public UserResponse hrmsUser(@RequestBody UserRequest request) {
         UserResponse response = new UserResponse();
